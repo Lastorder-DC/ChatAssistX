@@ -1,5 +1,6 @@
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: (typeof process.argv[3] != 'undefined') ? process.argv[3] : 4649 });
+const wsport = (typeof process.argv[3] != 'undefined') ? process.argv[3] : 4649;
+const wss = new WebSocket.Server({ port: wsport });
 const channel = process.argv[2];
 let count = 0;
 require('colors');
@@ -16,7 +17,7 @@ console.log("===================================\n");
 console.log("INFO".green + " : ChatAssistX server started");
 
 wss.on('listening', function(ws) {
-    console.log("INFO".green + " : Now listening port 4649...");
+    console.log("INFO".green + " : Now listening port " + wsport + "...");
 })
 
 wss.on('error', function(ws) {
