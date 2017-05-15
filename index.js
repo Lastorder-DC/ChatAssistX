@@ -1,11 +1,11 @@
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 4649 });
+const wss = new WebSocket.Server({ port: (typeof process.argv[3] != 'undefined') ? process.argv[3] : 4649 });
 const channel = process.argv[2];
 let count = 0;
 require('colors');
 
 if(typeof process.argv[2] == 'undefined' || process.argv[2] == '') {
-    console.log("Usage : " + process.argv[0] + " " + process.argv[1]);
+    console.log("Usage : npm start <channel id> <port number:default 4649>");
     process.exit(1);
 }
 console.log("===================================");
