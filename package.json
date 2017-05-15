@@ -19,5 +19,9 @@
     "colors": "^1.1.2",
     "tapic": "^5.0.0",
     "ws": "^2.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lastorder-DC/ChatAssistX.git"
   }
 }
