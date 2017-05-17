@@ -62,28 +62,11 @@ function heartbeat() {
 }
 
 function sendChat(rawbody) {
-/*
-{ from: '오얍레',
-color: '#d2691e',
-mod: false,
-sub: false,
-turbo: false,
-streamer: false,
-action: false,
-text: '스마슈가아니라 스마갤이겠지',
-emotes: '',
-badges: [ '' ],
-room_id: '66375105',
-user_id: '113614342',
-bits: undefined }
-*/
-    var chat = {};
-    
+    var chat = rawbody;
     chat.type = "chat_message";
     chat.platform = 'twitch';
-    chat.username = rawbody.from;
-    chat.message = rawbody.text.replace(/"/g,'\"');
-    chat.emotes = rawbody.emotes;
+    chat.username = chat.from;
+    chat.message = chat.text;
     wss.broadcast(JSON.stringify(chat));
 }
 
@@ -95,7 +78,6 @@ TAPIC.setup(oauth, function (username) {
     });
 });
 
-//TAPIC.listen('raw', event => sendChat(event,ws));
 TAPIC.listen('message', event => sendChat(event));
 
 
@@ -103,7 +85,6 @@ wss.on('connection', function connection(ws) {
     console.log("INFO".green + " : ChatAssist client connected.");
     ws.isAlive = true;
     ws.on('pong', heartbeat);
-    //TAPIC.listen('echoChat', event => console.log('echochat > ' + event));
 });
 
 const interval = setInterval(function ping() {
